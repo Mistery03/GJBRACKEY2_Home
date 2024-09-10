@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://gjv4bjhiki0o"]
+
+[ext_resource type="Texture2D" uid="uid://bduw04wqgk14s" path="res://asset/spritesheet/setio.png" id="1_hlmbi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbiip"]
+atlas = ExtResource("1_hlmbi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7ejg"]
+atlas = ExtResource("1_hlmbi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iode7"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_fbiip")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_h7ejg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_np3ao"]
+radius = 5.0
+height = 18.0
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_iode7")
+animation = &"idle"
+frame_progress = 0.347951
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_np3ao")
