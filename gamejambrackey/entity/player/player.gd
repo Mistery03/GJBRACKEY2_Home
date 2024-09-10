@@ -1,24 +1,20 @@
-extends CharacterBody2D
+class_name Player
+extends Entity
 
-@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
+func _process(delta: float) -> void:
+	look_at(get_global_mouse_position())
 
 func _physics_process(delta: float) -> void:
 	
-	
-	look_at(get_global_mouse_position())
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_vector("left","right","forward","backward")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity = direction* movementSpeed
 		animation.play("walk")
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, movementSpeed)
+		velocity.y = move_toward(velocity.y, 0, movementSpeed)
 		animation.play("idle")
 
 	move_and_slide()
