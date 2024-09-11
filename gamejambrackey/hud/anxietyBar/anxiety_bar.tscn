@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci67nwh2e2m2q"]
+
+[ext_resource type="Texture2D" uid="uid://bn2sgdlhcafy7" path="res://asset/hud/manaBorderBar2.png" id="1_hdat3"]
+[ext_resource type="Texture2D" uid="uid://dyobiyiwdywb0" path="res://asset/hud/soulbar.png" id="2_jscj3"]
+[ext_resource type="Script" path="res://hud/anxietyBar/anxiety_bar.gd" id="3_qugie"]
+
+[node name="AnxietyBar" type="TextureProgressBar"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -512.0
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+texture_over = ExtResource("1_hdat3")
+texture_progress = ExtResource("2_jscj3")
+script = ExtResource("3_qugie")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 150.0
+offset_right = 494.0
+offset_bottom = 419.0
+rotation = 1.5708
+theme_override_font_sizes/font_size = 25
+text = "A
+N
+X
+I
+E
+T
+Y"
+horizontal_alignment = 1

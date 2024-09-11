@@ -1,8 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://gjv4bjhiki0o"]
+[gd_scene load_steps=15 format=3 uid="uid://gjv4bjhiki0o"]
 
 [ext_resource type="Script" path="res://entity/player/player.gd" id="1_ar5lc"]
 [ext_resource type="Texture2D" uid="uid://bduw04wqgk14s" path="res://asset/spritesheet/setio.png" id="1_hlmbi"]
 [ext_resource type="Texture2D" uid="uid://darnykm550j67" path="res://asset/texture/flashlight.png" id="3_bsttv"]
+[ext_resource type="PackedScene" uid="uid://ci67nwh2e2m2q" path="res://hud/anxietyBar/anxiety_bar.tscn" id="4_j5dag"]
+[ext_resource type="AudioStream" uid="uid://cf2ov35ve7wwn" path="res://asset/sfx/breathingSFX.mp3" id="5_34ftj"]
+[ext_resource type="AudioStream" uid="uid://cwxsa0dv6ac3d" path="res://asset/sfx/heartbeatSFX.mp3" id="6_oqi6u"]
+[ext_resource type="AudioStream" uid="uid://daieuf88qcqr6" path="res://asset/sfx/breathIn.mp3" id="7_vst0t"]
+[ext_resource type="AudioStream" uid="uid://vvn74yfi3ckg" path="res://asset/sfx/breathOut.mp3" id="8_1qhdo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gsiun"]
 atlas = ExtResource("1_hlmbi")
@@ -75,3 +80,33 @@ position = Vector2(93, 1)
 energy = 0.8
 texture = ExtResource("3_bsttv")
 texture_scale = 0.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AnxietyBar" parent="CanvasLayer" node_paths=PackedStringArray("breathing", "breathIn", "heartbeat", "breathOut") instance=ExtResource("4_j5dag")]
+offset_left = -43.0
+offset_top = 530.0
+offset_right = -555.0
+offset_bottom = 202.0
+scale = Vector2(0.6, 0.6)
+step = 0.01
+breathing = NodePath("../../Breathing")
+breathIn = NodePath("../../BreathIn")
+heartbeat = NodePath("../../Heartbeat")
+breathOut = NodePath("../../BreathOut")
+
+[node name="Breathing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_34ftj")
+volume_db = -5.0
+autoplay = true
+
+[node name="Heartbeat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_oqi6u")
+volume_db = -80.0
+autoplay = true
+
+[node name="BreathIn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_vst0t")
+
+[node name="BreathOut" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_1qhdo")
