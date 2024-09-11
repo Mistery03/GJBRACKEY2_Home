@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://gjv4bjhiki0o"]
+[gd_scene load_steps=17 format=3 uid="uid://gjv4bjhiki0o"]
 
 [ext_resource type="Script" path="res://entity/player/player.gd" id="1_ar5lc"]
 [ext_resource type="Texture2D" uid="uid://bduw04wqgk14s" path="res://asset/spritesheet/setio.png" id="1_hlmbi"]
 [ext_resource type="Texture2D" uid="uid://darnykm550j67" path="res://asset/texture/flashlight.png" id="3_bsttv"]
 [ext_resource type="PackedScene" uid="uid://ci67nwh2e2m2q" path="res://hud/anxietyBar/anxiety_bar.tscn" id="4_j5dag"]
 [ext_resource type="AudioStream" uid="uid://cf2ov35ve7wwn" path="res://asset/sfx/breathingSFX.mp3" id="5_34ftj"]
+[ext_resource type="AudioStream" uid="uid://bqpd8fx4bt6we" path="res://asset/sfx/stoneWalkSFX.mp3" id="6_o53ut"]
 [ext_resource type="AudioStream" uid="uid://cwxsa0dv6ac3d" path="res://asset/sfx/heartbeatSFX.mp3" id="6_oqi6u"]
 [ext_resource type="AudioStream" uid="uid://daieuf88qcqr6" path="res://asset/sfx/breathIn.mp3" id="7_vst0t"]
 [ext_resource type="AudioStream" uid="uid://vvn74yfi3ckg" path="res://asset/sfx/breathOut.mp3" id="8_1qhdo"]
+[ext_resource type="Script" path="res://entity/player/sound_component.gd" id="10_6x6kt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gsiun"]
 atlas = ExtResource("1_hlmbi")
@@ -57,6 +59,8 @@ animations = [{
 radius = 6.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_ar5lc")
 animation = NodePath("AnimatedSprite2D")
 movementSpeed = 100.0
@@ -100,6 +104,10 @@ stream = ExtResource("5_34ftj")
 volume_db = -5.0
 autoplay = true
 
+[node name="WalkingOnStone" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_o53ut")
+volume_db = -5.0
+
 [node name="Heartbeat" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_oqi6u")
 volume_db = -80.0
@@ -110,3 +118,12 @@ stream = ExtResource("7_vst0t")
 
 [node name="BreathOut" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_1qhdo")
+
+[node name="SoundComponent" type="Node" parent="." node_paths=PackedStringArray("player", "stoneWalk", "walk_timer")]
+script = ExtResource("10_6x6kt")
+player = NodePath("..")
+stoneWalk = NodePath("../WalkingOnStone")
+walk_timer = NodePath("../Walk")
+
+[node name="Walk" type="Timer" parent="."]
+wait_time = 0.5

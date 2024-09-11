@@ -38,7 +38,7 @@ func _input(event: InputEvent) -> void:
 		
 		if breathIn.finished:
 			heartbeat.volume_db = -5
-		value -= 0.1
+		value -= 0.15
 		adjustBreathingNoise(value)
 		
 	if event.is_action_released("holdBreath"):
