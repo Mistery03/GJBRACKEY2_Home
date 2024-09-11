@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://c1cyo5w65jumv"]
+[gd_scene load_steps=7 format=4 uid="uid://c1cyo5w65jumv"]
 
 [ext_resource type="Texture2D" uid="uid://yjigukfy3ebx" path="res://asset/spritesheet/map.png" id="1_2tgas"]
 [ext_resource type="PackedScene" uid="uid://gjv4bjhiki0o" path="res://entity/player/player.tscn" id="2_6k2p1"]
 [ext_resource type="AudioStream" uid="uid://dprbgh4aildx1" path="res://asset/sfx/windy.mp3" id="3_p0qk8"]
+[ext_resource type="Script" path="res://scene/school/countdown.gd" id="4_7d6eb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uma7x"]
 texture = ExtResource("1_2tgas")
@@ -37,3 +38,21 @@ localTilemap = NodePath("../TileMapLayer")
 stream = ExtResource("3_p0qk8")
 volume_db = -25.0
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="countdown" type="Label" parent="CanvasLayer" node_paths=PackedStringArray("countdown")]
+offset_left = 349.0
+offset_top = -1.0
+offset_right = 746.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0.831204, 0, 0.253139, 1)
+theme_override_font_sizes/font_size = 60
+text = "5:00"
+horizontal_alignment = 1
+script = ExtResource("4_7d6eb")
+countdown = NodePath("../../CountDown")
+
+[node name="CountDown" type="Timer" parent="."]
+wait_time = 300.0
+one_shot = true
